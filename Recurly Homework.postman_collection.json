@@ -1,0 +1,558 @@
+{
+	"info": {
+		"_postman_id": "76b52b29-14d7-4b05-ab03-5ac70eff5ca7",
+		"name": "Recurly Homework",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Measured Units Homework",
+			"item": [
+				{
+					"name": "Create Measured Unit Создаем",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<measured_unit>\r\n  <name>Extraodinary</name>\r\n  <display_name>Choko</display_name>\r\n  <description>Video steaming bandwidth measured in gigabytes</description>\r\n</measured_unit>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{icon}}/measured_units",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"measured_units"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Measured Unit Удаляем",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{icon}}/measured_units/3475795718557307682",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"measured_units",
+								"3475795718557307682"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Loookup Measured Unit Просматриваем",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{icon}}/measured_units",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"measured_units"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List Measured Units Выводим список",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{icon}}/measured_units",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"measured_units"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Measured Unit Обновляем",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<measured_unit>\r\n  <display_name>Chokolate</display_name>\r\n</measured_unit>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{icon}}/measured_units/3475795718557307682",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"measured_units",
+								"3475795718557307682"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Coupons Homework",
+			"item": [
+				{
+					"name": "List Active Coupons Выводим список",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{icon}}/coupons",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"coupons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Coupon Создаем",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<coupon>\r\n  <coupon_code>special</coupon_code>\r\n  <name>Special $5 off coupon</name>\r\n  <discount_type>dollars</discount_type>\r\n    <discount_in_cents>\r\n    <USD>400</USD>\r\n  </discount_in_cents>\r\n  <redeem_by_date>2022-12-31</redeem_by_date>\r\n  <duration>temporal</duration>\r\n  <temporal_unit>day</temporal_unit>\r\n  <temporal_amount>28</temporal_amount>\r\n  <max_redemptions>200</max_redemptions>\r\n  <max_redemptions_per_account>2</max_redemptions_per_account>\r\n  <applies_to_all_plans>true</applies_to_all_plans>\r\n</coupon>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{icon}}/coupons",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"coupons"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lookup  a coupon Просматриваем",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{icon}}/coupons/special",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"coupons",
+								"special"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Edit coupon Изменяем (Редактируем)",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<coupon>\r\n  <name>Special $3 off coupon</name>\r\n  <description>Special $3 off coupon.</description>\r\n  <invoice_description>Special $3 off coupon.</invoice_description>\r\n  <redeem_by_date>2022-12-31</redeem_by_date>\r\n  <max_redemptions>300</max_redemptions>\r\n  <max_redemptions_per_account>2</max_redemptions_per_account>\r\n</coupon>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{icon}}/coupons/special",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"coupons",
+								"special"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Restore Coupon Восстанавливаем",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<coupon>\r\n  <name>Special $3 off coupon</name>\r\n  <description>Special $3 off coupon.</description>\r\n  <invoice_description>Special $3 off coupon.</invoice_description>\r\n  <redeem_by_date>2022-12-31</redeem_by_date>\r\n  <max_redemptions>300</max_redemptions>\r\n  <max_redemptions_per_account>2</max_redemptions_per_account>\r\n</coupon>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{icon}}/coupons/special/restore",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"coupons",
+								"special",
+								"restore"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Expire coupon Удаляем (истек срок)",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<coupon>\r\n  <name>Special $3 off coupon</name>\r\n  <description>Special $3 off coupon.</description>\r\n  <invoice_description>Special $3 off coupon.</invoice_description>\r\n  <redeem_by_date>2022-12-31</redeem_by_date>\r\n  <max_redemptions>300</max_redemptions>\r\n  <max_redemptions_per_account>2</max_redemptions_per_account>\r\n</coupon>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{icon}}/coupons/special",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"coupons",
+								"special"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Plans Homework",
+			"item": [
+				{
+					"name": "Create Plan Создаем",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<plan>\r\n  <plan_code>silver</plan_code>\r\n  <name>The 1st plan</name>\r\n  <unit_amount_in_cents>\r\n    <USD>10000</USD>\r\n  </unit_amount_in_cents>\r\n  <setup_fee_in_cents>\r\n    <USD>1000</USD>\r\n  </setup_fee_in_cents>\r\n  <plan_interval_length>2</plan_interval_length>\r\n  <plan_interval_unit>months</plan_interval_unit>\r\n  <tax_exempt>false</tax_exempt>\r\n</plan>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{icon}}/plans",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"plans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "List plans Выводим список",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{icon}}/plans",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"plans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Lookup plan Просматриваем",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{icon}}/plans/silver",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"plans",
+								"silver"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update plan Обновляем",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "<plan>\r\n  <setup_fee_in_cents>\r\n    <USD>5000</USD>\r\n  </setup_fee_in_cents>\r\n</plan>",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{icon}}/plans/silver",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"plans",
+								"silver"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete plan Удаляем",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Basic ZWE0NDhmZTkxY2ZiNGZmZTkzOTczYTlmNWQ5ZWUyMDQ6",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "xml"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{icon}}/plans/silver",
+							"host": [
+								"{{icon}}"
+							],
+							"path": [
+								"plans",
+								"silver"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "icon",
+			"value": "https://timofeyeva.eu.recurly.com/v2"
+		}
+	]
+}
