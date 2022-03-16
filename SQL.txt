@@ -1,0 +1,112 @@
+SQLite version 3.38.0 2022-02-22 18:58:40
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .open database db
+extra argument: "db"
+sqlite> .open database.db
+sqlite> .databases
+main: D:\гк\sqlite-tools-win32-x86-3380000\database.db r/w
+sqlite> create table hello(id integer, messege text);
+sqlite> .tables
+hello
+sqlite> insert into hello values(1,'hello, world!');
+sqlite> insert into hello
+   ...> values(2,'bye');
+sqlite> select * from hello;
+1|hello, world!
+2|bye
+sqlite> .mode box
+sqlite> select * from hello;
+┌────┬───────────────┐
+│ id │    messege    │
+├────┼───────────────┤
+│ 1  │ hello, world! │
+│ 2  │ bye           │
+└────┴───────────────┘
+sqlite> .output data.txt
+sqlite> select * from hello;
+sqlite> .exit
+
+создаем резервную копию
+SQLite version 3.38.0 2022-02-22 18:58:40
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .open database.db
+sqlite> .output data.txt
+sqlite> .dump
+sqlite> .exit
+
+Восстанавливаем после удаления database.db
+SQLite version 3.38.0 2022-02-22 18:58:40
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .open database.db
+sqlite> .read data.txt
+sqlite>
+
+SQLite version 3.38.0 2022-02-22 18:58:40
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .open database.db
+sqlite> .read data.txt
+sqlite> .open database.txt
+sqlite> create table person(id integer not null primary key autoincrement,
+   ...> firstname text not null, lastname text not null);
+sqlite> .tables
+person
+sqlite> insert into person(firstname,lastname) values('','');
+sqlite> .mode box
+sqlite> select * from person;
+┌────┬───────────┬──────────┐
+│ id │ firstname │ lastname │
+├────┼───────────┼──────────┤
+│ 1  │           │          │
+└────┴───────────┴──────────┘
+sqlite> delete from person where id=1;
+sqlite> select * from person;
+sqlite> insert into person(firstname,lastname) values('John','Doe');
+sqlite> insert into person(firstname,lastname) values('Иван','Иванов');
+sqlite> select * from person;
+┌────┬───────────┬──────────┐
+│ id │ firstname │ lastname │
+├────┼───────────┼──────────┤
+│ 2  │ John      │ Doe      │
+│ 3  │ Иван      │ Иванов   │
+└────┴───────────┴──────────┘
+sqlite> .schema person
+CREATE TABLE person(id integer not null primary key autoincrement,
+firstname text not null, lastname text not null);
+sqlite> create table passport(id integer not null primary key autoincrement,
+   ...> number text not null);
+sqlite> drop table passport;
+sqlite> .tables
+person
+sqlite> create table passport(id integer not null primary key autoincrement,
+   ...> number text not null, id_person integer);
+sqlite> insert into passport(number, id_person) values('MB2356956');
+Parse error: 1 values for 2 columns
+sqlite> insert into passport(number, id_person) values('MB2356956',2);
+sqlite> select * from passport;
+┌────┬───────────┬───────────┐
+│ id │  number   │ id_person │
+├────┼───────────┼───────────┤
+│ 1  │ MB2356956 │ 2         │
+└────┴───────────┴───────────┘
+sqlite> select firstname, lastname, number from person inner join passport on person.id=passport.id_person;
+┌───────────┬──────────┬───────────┐
+│ firstname │ lastname │  number   │
+├───────────┼──────────┼───────────┤
+│ John      │ Doe      │ MB2356956 │
+└───────────┴──────────┴───────────┘
+sqlite> select firstname, lastname, number from person left join passport on person.id=passport.id_person;
+┌───────────┬──────────┬───────────┐
+│ firstname │ lastname │  number   │
+├───────────┼──────────┼───────────┤
+│ John      │ Doe      │ MB2356956 │
+│ Иван      │ Иванов   │           │
+└───────────┴──────────┴───────────┘
+sqlite> .exit

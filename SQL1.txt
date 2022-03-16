@@ -1,0 +1,580 @@
+SQLite version 3.38.1 2022-03-12 13:37:29
+Enter ".help" for usage hints.
+Connected to a transient in-memory database.
+Use ".open FILENAME" to reopen on a persistent database.
+sqlite> .open database.db
+sqlite> .read data.txt
+sqlite> .open database.txt
+
+sqlite> create table message(id integer not null primary key autoincrement, message text not null, id_person integer not null);
+sqlite> .tables
+message  person
+sqlite> insert into message(message, id_person) values ('message 1 from John', 3);
+sqlite> insert into message(message, id_person) values ('message 2 from John', 3);
+sqlite> select * from  message;
+1|message 1 from John|3
+2|message 2 from John|3
+sqlite> .mode box
+sqlite> select * from message;
+┌────┬─────────────────────┬───────────┐
+│ id │       message       │ id_person │
+├────┼─────────────────────┼───────────┤
+│ 1  │ message 1 from John │ 3         │
+│ 2  │ message 2 from John │ 3         │
+└────┴─────────────────────┴───────────┘
+sqlite> select * from person inner join message on person.id-message.id_person;
+sqlite> select firstname, lastname, message from person inner join message on person.id-message.id_person;
+sqlite> .tables
+message  person
+sqlite> select * from message;
+┌────┬─────────────────────┬───────────┐
+│ id │       message       │ id_person │
+├────┼─────────────────────┼───────────┤
+│ 1  │ message 1 from John │ 3         │
+│ 2  │ message 2 from John │ 3         │
+└────┴─────────────────────┴───────────┘
+
+sqlite> insert into person(firstname,lastname) values('John','Doe');
+sqlite> insert into person(firstname,lastname) values('Иван','Иванов');
+sqlite> select * from person;
+┌────┬───────────┬──────────┐
+│ id │ firstname │ lastname │
+├────┼───────────┼──────────┤
+│ 1  │ John      │ Doe      │
+│ 2  │ Иван      │ Иванов   │
+└────┴───────────┴──────────┘
+sqlite> delete from person where id=1;
+sqlite> select * from person;
+┌────┬───────────┬──────────┐
+│ id │ firstname │ lastname │
+├────┼───────────┼──────────┤
+│ 2  │ Иван      │ Иванов   │
+└────┴───────────┴──────────┘
+sqlite> insert into person(firstname,lastname) values('John','Doe');
+sqlite> insert into person(firstname,lastname) values('Иван','Иванов');
+sqlite> select * from person;
+┌────┬───────────┬──────────┐
+│ id │ firstname │ lastname │
+├────┼───────────┼──────────┤
+│ 2  │ Иван      │ Иванов   │
+│ 3  │ John      │ Doe      │
+│ 4  │ Иван      │ Иванов   │
+└────┴───────────┴──────────┘
+sqlite> delete from person where id=4;
+sqlite> select * from person;
+┌────┬───────────┬──────────┐
+│ id │ firstname │ lastname │
+├────┼───────────┼──────────┤
+│ 2  │ Иван      │ Иванов   │
+│ 3  │ John      │ Doe      │
+└────┴───────────┴──────────┘
+sqlite> .schema person
+CREATE TABLE person(id integer not null primary key autoincrement, firstname text not null, lastname text not null);
+sqlite> create table passport(id integer not null primary key autoincrement,
+   ...> number text not null);
+sqlite> drop table passport;
+sqlite> .tables
+message  person
+
+sqlite> create table passport(id integer not null primary key autoincrement,
+   ...>   number text not null, id_person integer);
+sqlite> insert into passport(number, id_person) values('MB2356956',2);
+sqlite> select * from passport;
+┌────┬───────────┬───────────┐
+│ id │  number   │ id_person │
+├────┼───────────┼───────────┤
+│ 1  │ MB2356956 │ 2         │
+└────┴───────────┴───────────┘
+sqlite> select firstname, lastname, number from person inner join passport on person.id=passport.id_person;
+┌───────────┬──────────┬───────────┐
+│ firstname │ lastname │  number   │
+├───────────┼──────────┼───────────┤
+│ Иван      │ Иванов   │ MB2356956 │
+└───────────┴──────────┴───────────┘
+sqlite> select firstname, lastname, number from person left join passport on person.id=passport.id_person;
+┌───────────┬──────────┬───────────┐
+│ firstname │ lastname │  number   │
+├───────────┼──────────┼───────────┤
+│ Иван      │ Иванов   │ MB2356956 │
+│ John      │ Doe      │           │
+└───────────┴──────────┴───────────┘
+
+sqlite> .tables
+message   passport  person
+sqlite> insert into person(firstname,lastname) values('John','Doe');
+sqlite> select * from person inner join message on person.id-message.id_person;
+┌────┬───────────┬──────────┬────┬─────────────────────┬───────────┐
+│ id │ firstname │ lastname │ id │       message       │ id_person │
+├────┼───────────┼──────────┼────┼─────────────────────┼───────────┤
+│ 2  │ Иван      │ Иванов   │ 1  │ message 1 from John │ 3         │
+│ 2  │ Иван      │ Иванов   │ 2  │ message 2 from John │ 3         │
+│ 5  │ John      │ Doe      │ 1  │ message 1 from John │ 3         │
+│ 5  │ John      │ Doe      │ 2  │ message 2 from John │ 3         │
+└────┴───────────┴──────────┴────┴─────────────────────┴───────────┘
+sqlite>  select firstname, lastname, message from person inner join message on person.id-message.id_person;
+┌───────────┬──────────┬─────────────────────┐
+│ firstname │ lastname │       message       │
+├───────────┼──────────┼─────────────────────┤
+│ Иван      │ Иванов   │ message 1 from John │
+│ Иван      │ Иванов   │ message 2 from John │
+│ John      │ Doe      │ message 1 from John │
+│ John      │ Doe      │ message 2 from John │
+└───────────┴──────────┴─────────────────────┘
+sqlite> select * from person inner join message on person.id-message.id_person;
+┌────┬───────────┬──────────┬────┬─────────────────────┬───────────┐
+│ id │ firstname │ lastname │ id │       message       │ id_person │
+├────┼───────────┼──────────┼────┼─────────────────────┼───────────┤
+│ 2  │ Иван      │ Иванов   │ 1  │ message 1 from John │ 3         │
+│ 2  │ Иван      │ Иванов   │ 2  │ message 2 from John │ 3         │
+│ 5  │ John      │ Doe      │ 1  │ message 1 from John │ 3         │
+│ 5  │ John      │ Doe      │ 2  │ message 2 from John │ 3         │
+└────┴───────────┴──────────┴────┴─────────────────────┴───────────┘
+sqlite> select firstname, lastname, message from person inner join message on person.id-message.id_person;
+┌───────────┬──────────┬─────────────────────┐
+│ firstname │ lastname │       message       │
+├───────────┼──────────┼─────────────────────┤
+│ Иван      │ Иванов   │ message 1 from John │
+│ Иван      │ Иванов   │ message 2 from John │
+│ John      │ Doe      │ message 1 from John │
+│ John      │ Doe      │ message 2 from John │
+└───────────┴──────────┴─────────────────────┘
+sqlite> .schema person
+CREATE TABLE person(id integer not null primary key autoincrement, firstname text not null, lastname text not null);
+sqlite> .schema message
+CREATE TABLE message(id integer not null primary key autoincrement, message text not null, id_person integer not null);
+sqlite> select firstname, lastname, message from person left join message on person.id=message.id_person;
+┌───────────┬──────────┬─────────────────────┐
+│ firstname │ lastname │       message       │
+├───────────┼──────────┼─────────────────────┤
+│ Иван      │ Иванов   │                     │
+│ John      │ Doe      │ message 1 from John │
+│ John      │ Doe      │ message 2 from John │
+│ John      │ Doe      │                     │
+└───────────┴──────────┴─────────────────────┘
+sqlite> select  * from person;
+┌────┬───────────┬──────────┐
+│ id │ firstname │ lastname │
+├────┼───────────┼──────────┤
+│ 2  │ Иван      │ Иванов   │
+│ 3  │ John      │ Doe      │
+│ 5  │ John      │ Doe      │
+└────┴───────────┴──────────┘
+sqlite> insert into person(firstname, lastname) values ('John', 'Smith');
+sqlite> select *from person;
+┌────┬───────────┬──────────┐
+│ id │ firstname │ lastname │
+├────┼───────────┼──────────┤
+│ 2  │ Иван      │ Иванов   │
+│ 3  │ John      │ Doe      │
+│ 5  │ John      │ Doe      │
+│ 6  │ John      │ Smith    │
+└────┴───────────┴──────────┘
+
+sqlite> select * from person as p1 join person as p2 on p1.firstname=p2.firstname;
+┌────┬───────────┬──────────┬────┬───────────┬──────────┐
+│ id │ firstname │ lastname │ id │ firstname │ lastname │
+├────┼───────────┼──────────┼────┼───────────┼──────────┤
+│ 2  │ Иван      │ Иванов   │ 2  │ Иван      │ Иванов   │
+│ 3  │ John      │ Doe      │ 3  │ John      │ Doe      │
+│ 3  │ John      │ Doe      │ 5  │ John      │ Doe      │
+│ 3  │ John      │ Doe      │ 6  │ John      │ Smith    │
+│ 5  │ John      │ Doe      │ 3  │ John      │ Doe      │
+│ 5  │ John      │ Doe      │ 5  │ John      │ Doe      │
+│ 5  │ John      │ Doe      │ 6  │ John      │ Smith    │
+│ 6  │ John      │ Smith    │ 3  │ John      │ Doe      │
+│ 6  │ John      │ Smith    │ 5  │ John      │ Doe      │
+│ 6  │ John      │ Smith    │ 6  │ John      │ Smith    │
+└────┴───────────┴──────────┴────┴───────────┴──────────┘
+
+sqlite> select * from person as p1 join person as p2 on p1.firstname=p2.firstname and p1.lastname<>p2.lastname;
+┌────┬───────────┬──────────┬────┬───────────┬──────────┐
+│ id │ firstname │ lastname │ id │ firstname │ lastname │
+├────┼───────────┼──────────┼────┼───────────┼──────────┤
+│ 3  │ John      │ Doe      │ 6  │ John      │ Smith    │
+│ 5  │ John      │ Doe      │ 6  │ John      │ Smith    │
+│ 6  │ John      │ Smith    │ 3  │ John      │ Doe      │
+│ 6  │ John      │ Smith    │ 5  │ John      │ Doe      │
+└────┴───────────┴──────────┴────┴───────────┴──────────┘
+sqlite> select firstname, lastname, message from person inner join message on person.id=message.id_person;
+┌───────────┬──────────┬─────────────────────┐
+│ firstname │ lastname │       message       │
+├───────────┼──────────┼─────────────────────┤
+│ John      │ Doe      │ message 1 from John │
+│ John      │ Doe      │ message 2 from John │
+└───────────┴──────────┴─────────────────────┘
+sqlite> select firstname, lastname, message from person inner join message where person.id=message.id_person;
+┌───────────┬──────────┬─────────────────────┐
+│ firstname │ lastname │       message       │
+├───────────┼──────────┼─────────────────────┤
+│ John      │ Doe      │ message 1 from John │
+│ John      │ Doe      │ message 2 from John │
+└───────────┴──────────┴─────────────────────┘
+sqlite> select person.id, firstname, lastname, message from person, message where person.id=message.id_person;
+┌────┬───────────┬──────────┬─────────────────────┐
+│ id │ firstname │ lastname │       message       │
+├────┼───────────┼──────────┼─────────────────────┤
+│ 3  │ John      │ Doe      │ message 1 from John │
+│ 3  │ John      │ Doe      │ message 2 from John │
+└────┴───────────┴──────────┴─────────────────────┘
+sqlite> select p.id, firstname, lastname, message from person as p, message where p.id=message.id_person;
+┌────┬───────────┬──────────┬─────────────────────┐
+│ id │ firstname │ lastname │       message       │
+├────┼───────────┼──────────┼─────────────────────┤
+│ 3  │ John      │ Doe      │ message 1 from John │
+│ 3  │ John      │ Doe      │ message 2 from John │
+└────┴───────────┴──────────┴─────────────────────┘
+sqlite>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
