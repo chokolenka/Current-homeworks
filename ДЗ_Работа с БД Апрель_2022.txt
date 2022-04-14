@@ -1,0 +1,219 @@
+1 часть задания:
+
+Заполнить таблицы в базе данных с помощью запросов insert.
+.open database.db
+sqlite> .databases
+main: C:\SQLite\sqlite-tools-win32-x86-3380100\database.db r/w
+
+Создаем таблицу "Студент"
+sqlite> create table student(id integer not null primary key autoincrement,
+   ...> lastname text not null, firstname text not null);
+sqlite> .tables
+student
+sqlite> insert into student(lastname,firstname) values('Bondarenko','Stanislav');
+sqlite> insert into student(lastname,firstname) values('Gudova','Milana');
+sqlite> insert into student(lastname,firstname) values('Klimovich','Olga');
+sqlite> insert into student(lastname,firstname) values('Mineeva','Arina');
+sqlite> insert into student(lastname,firstname) values('Narushevich','Zlata');
+sqlite> .mode box
+
+Создаем таблицу "Форма обучения"
+sqlite> create table attendance(id integer not null primary key autoincrement,
+   ...> attendance_values varchar not null);
+sqlite> insert into attendance(attendance_values) values('fulltime');
+sqlite> insert into attendance(attendance_values) values('parttime');
+sqlite> insert into attendance(attendance_values) values('extramural');
+
+Создаем таблицу "Контингент студентов"
+sqlite> create table body(id integer not null primary key autoincrement, id_student integer,
+   ...> date_of_join date not null, id_attendance integer, group_number integer);
+sqlite> insert into body values('1', '1', '2020', '1', '112');
+sqlite> insert into body values('2', '2', '2020', '1', '112');
+sqlite> insert into body values('3', '3', '2020', '2', '114');
+sqlite> insert into body values('4', '4', '2020', '2', '114');
+sqlite> insert into body values('5', '5', '2021', '3', '108');
+
+Создаем таблицу "Название специальности"
+sqlite> create table speciality(id integer not null primary key autoincrement,speciality);
+sqlite> insert into speciality values('1', 'Art');
+sqlite> insert into speciality values('2', 'Physical Sciences');
+sqlite> insert into speciality values('3', 'Social Science');
+sqlite> insert into speciality values('4', 'Accounting');
+
+Создаем таблицу "Дисциплины"
+sqlite> create table subjects(id integer not null primary key autoincrement, subjects);
+sqlite> insert into subjects values('1', 'Art');
+sqlite> insert into subjects values('2', 'Fine Art');
+sqlite> insert into subjects values('3', 'History of Art');
+sqlite> insert into subjects values('4', 'Modern languages');
+sqlite> insert into subjects values('5', 'History');
+sqlite> insert into subjects values('6', 'Biology');
+sqlite> insert into subjects values('7', 'Chemistry');
+sqlite> insert into subjects values('8', 'Physics');
+sqlite> insert into subjects values('9', 'Politics');
+sqlite> insert into subjects values('10', 'Psycology');
+sqlite> insert into subjects values('11', 'Sociology');
+sqlite> insert into subjects values('12', 'Economics');
+sqlite> insert into subjects values('13', 'Accountancy');
+sqlite> insert into subjects values('14', 'Business studies');
+sqlite> insert into subjects values('15', 'Law');
+sqlite> insert into subjects values('16', 'Maths');
+
+Создаем таблицу "Форма отчетности"
+sqlite> create table forms_of_reporting(id integer not null primary key autoincrement, reporting_values);
+sqlite> insert into forms_of_reporting values('1', 'test');
+sqlite> insert into forms_of_reporting values('2', 'exam');
+
+Создаем таблицу "Учебный план"
+sqlite> create table curriculum(id integer not null primary key autoincrement, id_student integer, id_speciality integer, id_subjects integer, term integer, number_of_hours integer, id_reporting integer);
+sqlite> insert into curriculum values('1', '1', '1', '1', '1', '36', '1');
+sqlite>  insert into curriculum values('2', '1', '1', '2', '1', '36', '1');
+sqlite>  insert into curriculum values('3', '1', '1', '3', '1', '36', '1');
+sqlite>  insert into curriculum values('4', '1', '1', '4', '1', '36', '1');
+sqlite> insert into curriculum values('5', '2', '2', '5', '2', '36', '2');
+sqlite> insert into curriculum values('6', '2', '2', '6', '2', '36', '2');
+sqlite> insert into curriculum values('7', '2', '2', '7', '2', '36', '2');
+sqlite> insert into curriculum values('8', '2', '2', '8', '2', '36', '2');
+sqlite> insert into curriculum values('9', '3', '3', '9', '1', '36', '1');
+sqlite> insert into curriculum values('10', '3', '3', '10', '1', '36', '1');
+sqlite> insert into curriculum values('11', '3', '3', '11', '1', '36', '1');
+sqlite> insert into curriculum values('12', '3', '3', '12', '1', '36', '1');
+sqlite> insert into curriculum values('13', '4', '4', '13', '2', '36', '2');
+sqlite> insert into curriculum values('14', '4', '4', '14', '2', '36', '2');
+sqlite> insert into curriculum values('15', '4', '4', '15', '2', '36', '2');
+sqlite> insert into curriculum values('16', '4', '4', '16', '2', '36', '2');
+sqlite> insert into curriculum values('17', '5', '5', '16', '2', '36', '2');
+sqlite> insert into curriculum values('18', '5', '5', '15', '2', '36', '2');
+sqlite> insert into curriculum values('19', '5', '5', '14', '1', '36', '1');
+sqlite> insert into curriculum values('20', '5', '5', '13', '1', '36', '1');
+
+Создаем таблицу "Журнал успеваемости"
+sqlite>  create table gradebook(id integer not null primary key autoincrement,id_student integer,
+   ...> year integer, term integer, id_subjects integer, marks integer);
+sqlite> insert into gradebook values('1','1', '2020', '1', '1', '7');
+sqlite> insert into gradebook values('2','1', '2020', '1', '2', '8');
+sqlite> insert into gradebook values('3','1', '2020', '1', '3', '7');
+sqlite> insert into gradebook values('4','1', '2020', '1', '4', '7');
+sqlite> insert into gradebook values('5','2', '2020', '2', '5', '9');
+sqlite> insert into gradebook values('6','2', '2020', '2', '6', '9');
+sqlite> insert into gradebook values('7','2', '2020', '2', '7', '9');
+sqlite> insert into gradebook values('8','2', '2020', '2', '8', '9');
+sqlite> insert into gradebook values('9','3', '2020', '1', '9', '6');
+sqlite> insert into gradebook values('10','3', '2020', '1', '10', '5');
+sqlite> insert into gradebook values('11','3', '2020', '1', '11', '6');
+sqlite> insert into gradebook values('12','3', '2020', '1', '12', '5');
+sqlite> insert into gradebook values('13','4', '2020', '2', '13', '8');
+sqlite> insert into gradebook values('14','4', '2020', '2', '14', '9');
+sqlite> insert into gradebook values('15','4', '2020', '2', '15', '8');
+sqlite> insert into gradebook values('16','4', '2020', '2', '16', '8');
+sqlite> insert into gradebook values('17','5', '2020', '2', '16', '4');
+sqlite> insert into gradebook values('18','5', '2020', '2', '15', '4');
+sqlite> insert into gradebook values('19','5', '2020', '1', '14', '6');
+sqlite> insert into gradebook values('20','5', '2020', '1', '13', '5');
+
+2 часть задания:
+
+Составить 20 запросов select для выборки данных из связанных таблиц.
+
+Запрос с внутренним соединением таблиц "body" и "student".
+sqlite> select student.id,lastname, firstname from student left join body on student.id=body.id_student;
+
+Вывести название дисциплины, семестр, количество часов, отведенных на дисциплину 
+select id_subjects,term,number_of_hours from curriculum;
+
+Вывевсти средний балл успеваемости.
+select avg(marks) from gradebook;
+
+Вывести максимальный балл.
+sqlite> select marks, max(marks) from gradebook; 
+
+Вывести минимальный балл.
+sqlite> select marks, min(marks) from gradebook;
+
+Выводим фамилию и имя студента, название группы, присоединяя информацию о студенте из таблицы 'Student", где id будет соответсвовать имя и фамилия.
+select lastname, firstname, group_number from student left join body on student.id=body.id_student;
+
+Условие
+select id_student, number_of_hours from curriculum where curriculum.id=curriculum.id_student; (where)
+
+Условие(where)
+select * from subjects where id>5; 
+
+Условие (where) Выберем первые 4 записи из таблицы "Студент":
+select * from student where id>0 limit 4; 
+
+Условие(where,!)
+select * from curriculum where id!=8; 
+
+Условие(where)
+select* from curriculum where term=2 and id_reporting=2; 
+
+Подсчет записей (count)
+select count(*) as count from body where date_of_join=2020; 
+
+select count(distinct marks)as count from gradebook; 
+
+select count(distinct id_student)as count1, count (distinct marks)as count2 from gradebook; 
+
+select count(marks) as count from gradebook; 
+
+Сортировка(order by)
+Выберем из таблицы "Дисциплины"  записи, начиная с 4, отсортируем их с помощью order by и возьмем 7 записей с помощью limit
+select * from subjects where id>4 order by id limit 7; 
+
+select * from gradebook  where term>1 order by term limit 7; 
+
+Выберем все записи из таблицы и отсортируем их по возрастанию отметок.
+select * from gradebook where id>0 order by marks; 
+
+Отсортируем записи по убыванию отметок.
+select * from gradebook order by marks desc; 
+
+Выбор из промежутка (where, between)
+Выберем записи специальностей id с от 2-х до 4-х включительно.
+select * from curriculum where id_speciality between 2 and 4; 
+
+Выбор из промежутка (where, between)
+Выберем записи специальностей id с от 2-х до 4-х включительно и чтобы при этом семестр был второй.
+select * from curriculum where id_speciality between 2 and 4 and term =2;
+
+Выбор из промежутка (where, between)
+Выбрать по строковым значениям. Выбираем все записи с предметами между "Fine Art" и "Psycology".
+select * from subjects where subjects between "Fine Art" and "Psycology"; 
+ 
+Редактирование записей update
+В данном случае фамилию 'Bondarenko' меняем на 'Bondarenkov'.
+update student set lastname='Bondarenkov' where lastname='Bondarenko'; 
+
+Редактирование записей update
+Выбираем записи из "Gradebook", где семестр "2" и отметки "9". 
+select * from  where term =2 and marks=9; 
+
+Заданные значения(in)
+Выбираем записи в таблице "Curriculum" id равные 1,4,6,8,12.
+select * from curriculum where id in (1,4,6,8,12); 
+
+Заданные значения(in)
+Выберем записи с именами 'Milana','Olga','Zlata'. (in)
+select * from student where firstname in ('Milana','Olga','Zlata');
+
+Поиск по шаблону(like)
+Команда like  находит все записи '%gy'.
+select * from subjects where subjects like '%gy'; 
+
+Уникальные значения(distinct)
+Выберем уникальные формы отчетности из таблицы "Body".
+select distinct id_attendance from body; 
+
+Посчитаем уникальные значения count (distinct)
+Подсчитаем все уникальные формы отчетности из таблицы "Body".
+select count (distinct id_attendance) as count from body; 
+
+sum (distinct)
+Просуммируем все уникальные  отметки из таблицы "Gradebook".
+select sum(distinct marks) as sum from gradebook; 
+
+Объединяем записи из двух таблиц (Student" /"Body").
+select id,firstname from student union all select id,group_number from body;
+
+select forms_of_reporting.id,reporting_values from forms_of_reporting join curriculum on forms_of_reporting.id=curriculum.id_reporting;
