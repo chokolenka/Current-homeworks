@@ -112,8 +112,8 @@ public class Invoice {
     }
 
     public Invoice (String supplier, String receiving, double order, int delivery,
-                             int invoice, String product, int QtyOrdered, int QtyReceived, String date,
-                             double cost, double value, double balance) {
+                    int invoice, String product, int QtyOrdered, int QtyReceived, String date,
+                    double cost, double value, double balance) {
         this.supplier = supplier;
         this.receiving = receiving;
         this.order = order;
@@ -252,8 +252,7 @@ public class Invoice {
                                     s.getSupplier().equalsIgnoreCase("Coca-Cola Company"))).
                     collect(Collectors.toList()));
 
-            System.out.println("Products in the warehouse: \n" + " ");
+            System.out.println("Products in the warehouse: \n" + WarehouseProducts);
         }
     }
 }
-
